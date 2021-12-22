@@ -46,9 +46,6 @@ public class ProductService {
                 if (product.getPrice() != 0.0) {
                     dbProduct.get().setPrice(product.getPrice());
                 }
-                if (product.getPrice() != 0.0) {
-                    dbProduct.get().setPrice(product.getPrice());
-                }
                 if (product.getQuantity() != 0) {
                     dbProduct.get().setQuantity(product.getQuantity());
                 }
@@ -73,5 +70,12 @@ public class ProductService {
             productRepository.delete(product);
             return true;
         }).orElse(false);
+    }
+
+    public List<Product> findByDescriptionContainingIgnoreCase(String description){
+        return productRepository.findByDescriptionContainingIgnoreCase(description);
+    }
+    public List<Product> findByPriceLessThanEqual(Double price){
+        return productRepository.findByPriceLessThanEqual(price);
     }
 }

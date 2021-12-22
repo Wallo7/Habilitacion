@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/product")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ProductController {
     @Autowired
@@ -28,7 +28,7 @@ public class ProductController {
         productService.save(product);
     }
 
-    @PutMapping("/update")
+     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Product update(@RequestBody Product product){
         return productService.update(product);
@@ -45,5 +45,14 @@ public class ProductController {
         return productService.getProduct(reference);
     }
 
+    @GetMapping("/description/{description}")
+    public List<Product> findByDescriptionContainingIgnoreCase(@PathVariable ("description") String description){
+        return productService.findByDescriptionContainingIgnoreCase(description);
+    }
+
+    @GetMapping("/price/{price}")
+    public List<Product> findByPriceLessThanEqual(@PathVariable ("price") Double price){
+        return productService.findByPriceLessThanEqual(price);
+    }
 
 }
